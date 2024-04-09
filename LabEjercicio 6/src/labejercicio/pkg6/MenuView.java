@@ -29,12 +29,12 @@ public MenuView() {
 
         escritorio = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
+        jMAdministracion = new javax.swing.JMenu();
+        jMProducto = new javax.swing.JMenuItem();
+        jMConsulta = new javax.swing.JMenu();
+        jMRubro = new javax.swing.JMenuItem();
+        jMNombre = new javax.swing.JMenuItem();
+        jMPrecio = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -49,40 +49,40 @@ public MenuView() {
             .addGap(0, 426, Short.MAX_VALUE)
         );
 
-        jMenu2.setText("Administracion");
+        jMAdministracion.setText("Administracion");
 
-        jMenuItem2.setText("Productos");
-        jMenu2.add(jMenuItem2);
+        jMProducto.setText("Productos");
+        jMAdministracion.add(jMProducto);
 
-        jMenuBar1.add(jMenu2);
+        jMenuBar1.add(jMAdministracion);
 
-        jMenu3.setText("Consultas");
+        jMConsulta.setText("Consultas");
 
-        jMenuItem3.setText("Por rubro...");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        jMRubro.setText("Por rubro...");
+        jMRubro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+                jMRubroActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem3);
+        jMConsulta.add(jMRubro);
 
-        jMenuItem4.setText("Por nombre...");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+        jMNombre.setText("Por nombre...");
+        jMNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
+                jMNombreActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem4);
+        jMConsulta.add(jMNombre);
 
-        jMenuItem5.setText("Por precio...");
-        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+        jMPrecio.setText("Por precio...");
+        jMPrecio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem5ActionPerformed(evt);
+                jMPrecioActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem5);
+        jMConsulta.add(jMPrecio);
 
-        jMenuBar1.add(jMenu3);
+        jMenuBar1.add(jMConsulta);
 
         setJMenuBar(jMenuBar1);
 
@@ -102,7 +102,7 @@ public MenuView() {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+    private void jMPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMPrecioActionPerformed
         escritorio.removeAll();;
         escritorio.repaint();;
         
@@ -111,9 +111,9 @@ public MenuView() {
         
         escritorio.add(bpp);
         escritorio.moveToFront(bpp);
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
+    }//GEN-LAST:event_jMPrecioActionPerformed
 
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+    private void jMNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMNombreActionPerformed
            escritorio.removeAll();
            escritorio.repaint();
            
@@ -122,9 +122,9 @@ public MenuView() {
            
            escritorio.add(bpn);
            escritorio.moveToFront(bpn);
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
+    }//GEN-LAST:event_jMNombreActionPerformed
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+    private void jMRubroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMRubroActionPerformed
         escritorio.removeAll();;
         escritorio.repaint();;
         
@@ -133,7 +133,7 @@ public MenuView() {
         
         escritorio.add(bpr);
         escritorio.moveToFront(bpr);
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    }//GEN-LAST:event_jMRubroActionPerformed
 
     /**
      * @param args the command line arguments
@@ -172,13 +172,13 @@ public MenuView() {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane escritorio;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMAdministracion;
+    private javax.swing.JMenu jMConsulta;
+    private javax.swing.JMenuItem jMNombre;
+    private javax.swing.JMenuItem jMPrecio;
+    private javax.swing.JMenuItem jMProducto;
+    private javax.swing.JMenuItem jMRubro;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
     // End of variables declaration//GEN-END:variables
 
     
