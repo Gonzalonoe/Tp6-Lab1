@@ -52,6 +52,11 @@ public MenuView() {
         jMAdministracion.setText("Administracion");
 
         jMProducto.setText("Productos");
+        jMProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMProductoActionPerformed(evt);
+            }
+        });
         jMAdministracion.add(jMProducto);
 
         jMenuBar1.add(jMAdministracion);
@@ -134,6 +139,17 @@ public MenuView() {
         escritorio.add(bpr);
         escritorio.moveToFront(bpr);
     }//GEN-LAST:event_jMRubroActionPerformed
+
+    private void jMProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMProductoActionPerformed
+           escritorio.removeAll();
+           escritorio.repaint();
+           
+           GestionProductos gp = new GestionProductos();
+           gp.setVisible(true);
+           
+           escritorio.add(gp);
+           escritorio.moveToFront(gp);
+    }//GEN-LAST:event_jMProductoActionPerformed
 
     /**
      * @param args the command line arguments
