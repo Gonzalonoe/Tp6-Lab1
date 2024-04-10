@@ -80,7 +80,7 @@ public class GestionProductos extends javax.swing.JInternalFrame {
 
         jLGestion.setText("Gestión de Productos");
 
-        jCRubro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jCRubro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Comestible", "Limpieza", "Perfumeria" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -114,9 +114,10 @@ public class GestionProductos extends javax.swing.JInternalFrame {
                                     .addComponent(jLPrecio)
                                     .addGap(39, 39, 39)))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLRubro)
-                                .addGap(35, 35, 35))
-                            .addComponent(jLStock))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLRubro)
+                                    .addComponent(jLStock))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addGroup(layout.createSequentialGroup()

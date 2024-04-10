@@ -4,6 +4,7 @@
  */
 package labejercicio.pkg6;
 
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -11,6 +12,7 @@ import javax.swing.table.DefaultTableModel;
  * @author emanu
  */
 public class BusquedaPorNombreView extends javax.swing.JInternalFrame {
+    
     private DefaultTableModel modelo = new DefaultTableModel(){
     
     public boolean isCellEditable(int f, int c) {
@@ -37,6 +39,11 @@ public class BusquedaPorNombreView extends javax.swing.JInternalFrame {
         jtBuscarPorNombre = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtProductos = new javax.swing.JTable();
+
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+        setResizable(true);
 
         jLabel1.setText("Listado por nombre");
 
@@ -105,6 +112,8 @@ public class BusquedaPorNombreView extends javax.swing.JInternalFrame {
         modelo.addColumn("Precio");
         modelo.addColumn("Stock");
         
+        
         jtProductos.setModel(modelo);
+        
     }
 }
