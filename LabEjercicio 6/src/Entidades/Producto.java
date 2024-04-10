@@ -1,15 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package labejercicio.pkg6;
+package Entidades;
 
-/**
- *
- * @author emanu
- */
-public class Producto implements Comparable <Producto> {
-   
+public class Producto implements Comparable<Producto> {
+
     private int codigo;
     private String descripcion;
     private double precio;
@@ -66,7 +58,7 @@ public class Producto implements Comparable <Producto> {
 
     @Override
     public int compareTo(Producto o) {
-        
+
         if (codigo == o.codigo) {
             return 0;
         } else if (codigo > o.codigo) {
@@ -76,7 +68,5 @@ public class Producto implements Comparable <Producto> {
         }
 
     }
-
-   
 
 }
