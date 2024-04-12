@@ -9,6 +9,7 @@ public class MenuView extends javax.swing.JFrame {
 
     public MenuView() {
         initComponents();
+
     }
 
     @SuppressWarnings("unchecked")
@@ -96,8 +97,8 @@ public class MenuView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMPrecioActionPerformed
-        escritorio.removeAll();;
-        escritorio.repaint();;
+        escritorio.removeAll();
+        escritorio.repaint();
 
         BusquedaPorPrecioView bpp = new BusquedaPorPrecioView();
         bpp.setVisible(true);
@@ -118,8 +119,8 @@ public class MenuView extends javax.swing.JFrame {
     }//GEN-LAST:event_jMNombreActionPerformed
 
     private void jMRubroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMRubroActionPerformed
-        escritorio.removeAll();;
-        escritorio.repaint();;
+        escritorio.removeAll();
+        escritorio.repaint();
 
         BusquedaPorRubroView bpr = new BusquedaPorRubroView();
         bpr.setVisible(true);
@@ -132,7 +133,7 @@ public class MenuView extends javax.swing.JFrame {
         escritorio.removeAll();
         escritorio.repaint();
 
-        GestionProductos gp = new GestionProductos();
+        GestionProductos gp = new GestionProductos(listaProductos);
         gp.setVisible(true);
 
         escritorio.add(gp);

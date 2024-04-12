@@ -1,9 +1,17 @@
 package Vistas.pkg6;
 
+import Entidades.*;
+import java.util.TreeSet;
+import javax.swing.JOptionPane;
+
 public class GestionProductos extends javax.swing.JInternalFrame {
 
-    public GestionProductos() {
+    private TreeSet<Producto> Producto;
+
+    public GestionProductos(TreeSet<Producto> Producto) {
         initComponents();
+        this.Producto = Producto;
+        llenarRubros();
     }
 
     @SuppressWarnings("unchecked")
@@ -56,6 +64,11 @@ public class GestionProductos extends javax.swing.JInternalFrame {
 
         jBGuardar.setText("Guardar");
         jBGuardar.setEnabled(false);
+        jBGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBGuardarActionPerformed(evt);
+            }
+        });
 
         jBEliminar.setText("Eliminar");
         jBEliminar.setEnabled(false);
@@ -72,6 +85,11 @@ public class GestionProductos extends javax.swing.JInternalFrame {
         jTDescripcion.setEnabled(false);
 
         jBBuscar.setText("BUSCAR");
+        jBBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBBuscarActionPerformed(evt);
+            }
+        });
 
         jTPrecio.setEnabled(false);
         jTPrecio.addActionListener(new java.awt.event.ActionListener() {
@@ -82,7 +100,6 @@ public class GestionProductos extends javax.swing.JInternalFrame {
 
         jLGestion.setText("Gestión de Productos");
 
-        jCRubro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Comestible", "Limpieza", "Perfumeria" }));
         jCRubro.setEnabled(false);
 
         jTStock.setEnabled(false);
@@ -147,10 +164,11 @@ public class GestionProductos extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLGestion)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLCodigo)
-                    .addComponent(jBBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jBBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jTCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLCodigo)))
                 .addGap(8, 8, 8)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -187,26 +205,73 @@ public class GestionProductos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTPrecioActionPerformed
 
     private void jBNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBNuevoActionPerformed
-        
+
         jLDescripcion.setEnabled(true);
         jLPrecio.setEnabled(true);
         jLRubro.setEnabled(true);
         jLStock.setEnabled(true);
 
-      
         jTDescripcion.setEnabled(true);
         jTPrecio.setEnabled(true);
         jCRubro.setEnabled(true);
         jTStock.setEnabled(true);
 
-        jBEliminar.setEnabled(true);
         jBGuardar.setEnabled(true);
         jBSalir.setEnabled(true);
     }//GEN-LAST:event_jBNuevoActionPerformed
 
+
     private void jTCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTCodigoActionPerformed
-        // TODO add your handling code here:
+
+
     }//GEN-LAST:event_jTCodigoActionPerformed
+
+    private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
+        String desc = "";
+        int prec;
+        int stock;
+        int cod;
+        jBEliminar.setEnabled(true);
+
+        cod = Integer.parseInt(jTCodigo.getText());
+        if (!jTDescripcion.getText().isEmpty()) {
+            desc = jTDescripcion.getText();
+        } else {
+            JOptionPane.showConfirmDialog(this, "Campo Vacio");
+        }
+        prec = Integer.parseInt(jTPrecio.getText());
+        stock = Integer.parseInt(jTStock.getText());
+        Categoria rub = (Categoria) jCRubro.getSelectedItem();
+        Producto nvoprod = new Producto(cod, desc, prec, stock, rub);
+        MenuView.listaProductos.add(nvoprod);
+    }//GEN-LAST:event_jBGuardarActionPerformed
+
+    private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
+        if (jTCodigo.getText() )    {
+
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    ) {
+
+        }
+
+
+    }//GEN-LAST:event_jBBuscarActionPerformed
+
+    public void llenarRubros() {
+        jCRubro.addItem(Categoria.COMESTIBLE);
+        jCRubro.addItem(Categoria.LIMPIEZA);
+        jCRubro.addItem(Categoria.PERFUMERIA);
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -215,7 +280,7 @@ public class GestionProductos extends javax.swing.JInternalFrame {
     private javax.swing.JButton jBGuardar;
     private javax.swing.JButton jBNuevo;
     private javax.swing.JButton jBSalir;
-    private javax.swing.JComboBox<String> jCRubro;
+    private javax.swing.JComboBox<Categoria> jCRubro;
     private javax.swing.JLabel jLCodigo;
     private javax.swing.JLabel jLDescripcion;
     private javax.swing.JLabel jLGestion;
