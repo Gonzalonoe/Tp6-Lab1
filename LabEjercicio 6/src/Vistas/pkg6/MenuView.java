@@ -5,9 +5,10 @@ import java.util.TreeSet;
 
 public class MenuView extends javax.swing.JFrame {
 
-    public static TreeSet<Producto> listaProductos = new TreeSet<>();
+    private TreeSet<Producto> listaProductos;
 
     public MenuView() {
+        this.listaProductos = new TreeSet<>();
         initComponents();
 
     }
@@ -90,7 +91,7 @@ public class MenuView extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(escritorio)
+            .addComponent(escritorio, javax.swing.GroupLayout.Alignment.TRAILING)
         );
 
         pack();

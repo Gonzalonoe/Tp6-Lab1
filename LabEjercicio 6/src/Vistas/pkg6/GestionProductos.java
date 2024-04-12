@@ -1,17 +1,24 @@
 package Vistas.pkg6;
 
 import Entidades.*;
+import java.util.regex.Matcher;
 import java.util.TreeSet;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import java.awt.Image;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 public class GestionProductos extends javax.swing.JInternalFrame {
 
-    private TreeSet<Producto> Producto;
+    private TreeSet<Producto> productos;
+    private Producto auxiliar = null;
 
-    public GestionProductos(TreeSet<Producto> Producto) {
+    public GestionProductos(TreeSet<Producto> productos) {
         initComponents();
-        this.Producto = Producto;
+        this.productos = productos;
         llenarRubros();
+        jBBuscar.setIcon(setIcono("/iconos/lupita.png", jBBuscar));
     }
 
     @SuppressWarnings("unchecked")
@@ -72,9 +79,19 @@ public class GestionProductos extends javax.swing.JInternalFrame {
 
         jBEliminar.setText("Eliminar");
         jBEliminar.setEnabled(false);
+        jBEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBEliminarActionPerformed(evt);
+            }
+        });
 
         jBSalir.setText("Salir");
         jBSalir.setEnabled(false);
+        jBSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBSalirActionPerformed(evt);
+            }
+        });
 
         jTCodigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -84,7 +101,9 @@ public class GestionProductos extends javax.swing.JInternalFrame {
 
         jTDescripcion.setEnabled(false);
 
+        jBBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/lupita.png"))); // NOI18N
         jBBuscar.setText("BUSCAR");
+        jBBuscar.setOpaque(true);
         jBBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBBuscarActionPerformed(evt);
@@ -143,9 +162,9 @@ public class GestionProductos extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jTCodigo)
-                                .addGap(104, 104, 104)
-                                .addComponent(jBBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(32, 32, 32))
+                                .addGap(88, 88, 88)
+                                .addComponent(jBBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(26, 26, 26))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -164,12 +183,12 @@ public class GestionProductos extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLGestion)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jBBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jTCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLCodigo)))
-                .addGap(8, 8, 8)
+                        .addComponent(jLCodigo))
+                    .addComponent(jBBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -205,7 +224,7 @@ public class GestionProductos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTPrecioActionPerformed
 
     private void jBNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBNuevoActionPerformed
-
+        jBEliminar.setEnabled(false);
         jLDescripcion.setEnabled(true);
         jLPrecio.setEnabled(true);
         jLRubro.setEnabled(true);
@@ -219,6 +238,31 @@ public class GestionProductos extends javax.swing.JInternalFrame {
         jBGuardar.setEnabled(true);
         jBSalir.setEnabled(true);
     }//GEN-LAST:event_jBNuevoActionPerformed
+    public void limpiar() {
+
+        jTCodigo.setText("");
+        jTDescripcion.setText("");
+        jTPrecio.setText("");
+        jTStock.setText("");
+        jCRubro.setSelectedIndex(-1);
+        jBEliminar.setEnabled(false);
+        auxiliar = null;
+
+    }
+
+    private boolean validaEntero(String nro) {
+
+        java.util.regex.Pattern patron = java.util.regex.Pattern.compile("^[0-9]+$");
+        Matcher m = patron.matcher(nro);
+        return m.matches();
+    }
+
+    private boolean validaReal(String nro) {
+        java.util.regex.Pattern patron = java.util.regex.Pattern.compile("^[0-9]+.[0-9]$");
+        Matcher m = patron.matcher(nro);
+        return m.matches();
+
+    }
 
 
     private void jTCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTCodigoActionPerformed
@@ -228,44 +272,98 @@ public class GestionProductos extends javax.swing.JInternalFrame {
 
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
         String desc = "";
-        int prec;
+        double prec;
         int stock;
         int cod;
+
         jBEliminar.setEnabled(true);
 
+        if (validaEntero(jTCodigo.getText())) {
+            cod = Integer.parseInt(jTCodigo.getText());
+        } else {
+
+            JOptionPane.showMessageDialog(this, "Ingresar un codigo");
+            jTCodigo.requestFocus();
+            return;
+        }
         cod = Integer.parseInt(jTCodigo.getText());
+
         if (!jTDescripcion.getText().isEmpty()) {
             desc = jTDescripcion.getText();
         } else {
             JOptionPane.showConfirmDialog(this, "Campo Vacio");
         }
-        prec = Integer.parseInt(jTPrecio.getText());
+
+        if (validaReal(jTPrecio.getText())) {
+            prec = Double.parseDouble(jTPrecio.getText());
+        } else {
+
+            JOptionPane.showMessageDialog(this, "Ingresar un precio ");
+            jTPrecio.requestFocus();
+            return;
+        }
+        if (validaEntero(jTStock.getText())) {
+            stock = Integer.parseInt(jTStock.getText());
+        } else {
+
+            JOptionPane.showMessageDialog(this, "Ingresar un stock ");
+            jTStock.requestFocus();
+            return;
+        }
+
+        prec = Double.parseDouble(jTPrecio.getText());
         stock = Integer.parseInt(jTStock.getText());
         Categoria rub = (Categoria) jCRubro.getSelectedItem();
-        Producto nvoprod = new Producto(cod, desc, prec, stock, rub);
-        MenuView.listaProductos.add(nvoprod);
+        Producto num1 = new Producto(cod, desc, prec, stock, rub);
+
+        if (productos.add(num1)) {
+            JOptionPane.showMessageDialog(this, "Producto Agregado");
+            limpiar();
+        } else {
+
+            JOptionPane.showMessageDialog(this, "Ya existe un producto con ese código");
+        }
+
+
     }//GEN-LAST:event_jBGuardarActionPerformed
 
     private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
-        if (jTCodigo.getText() )    {
+        int cd = Integer.parseInt(jTCodigo.getText());
 
+        for (Producto prod : productos) {
+            if (cd == prod.getCodigo()) {
+                jTDescripcion.setText(prod.getDescripcion());
+                jTPrecio.setText(prod.getPrecio() + "");
+                jTStock.setText(prod.getStock() + "");
+                jCRubro.setSelectedItem(prod.getRubro());
+                jBEliminar.setEnabled(true);
+                auxiliar = prod;
+                return;
+            }
         }
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-    ) {
-
-        }
-
+        JOptionPane.showMessageDialog(this, "Codigo no Existente");
 
     }//GEN-LAST:event_jBBuscarActionPerformed
+
+    private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
+
+        int op = JOptionPane.showConfirmDialog(this, "Desea Eliminar?", "Eliminar", JOptionPane.YES_NO_OPTION);
+        if (op == JOptionPane.YES_OPTION) {
+            productos.remove(auxiliar);
+            JOptionPane.showMessageDialog(this, "Producto Eliminado ");
+            limpiar();
+            auxiliar = null;
+        }
+
+
+    }//GEN-LAST:event_jBEliminarActionPerformed
+
+    private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
+
+        dispose();
+
+
+    }//GEN-LAST:event_jBSalirActionPerformed
 
     public void llenarRubros() {
         jCRubro.addItem(Categoria.COMESTIBLE);
@@ -273,6 +371,16 @@ public class GestionProductos extends javax.swing.JInternalFrame {
         jCRubro.addItem(Categoria.PERFUMERIA);
     }
 
+    public Icon setIcono(String url, JButton boton) {
+        ImageIcon icon = new ImageIcon(getClass().getResource(url));
+        //int ancho = boton.getWidth();
+        //int alto = boton.getHeight();
+
+        ImageIcon icono = new ImageIcon(icon.getImage().getScaledInstance(15, 15, Image.SCALE_DEFAULT));
+
+        return icono;
+
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBBuscar;
