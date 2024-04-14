@@ -1,5 +1,8 @@
 package Vistas.pkg6;
 
+import Entidades.Categoria;
+import Entidades.Producto;
+import java.util.TreeSet;
 import javax.swing.table.DefaultTableModel;
 
 public class BusquedaPorRubroView extends javax.swing.JInternalFrame {
@@ -10,10 +13,13 @@ public class BusquedaPorRubroView extends javax.swing.JInternalFrame {
             return false;
         }
     };
-
-    public BusquedaPorRubroView() {
+private TreeSet<Producto> productos;
+    public BusquedaPorRubroView(TreeSet<Producto> productos) {
+        this.productos=productos;
         initComponents();
         armarCabecera();
+        llenarCombo();
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -35,7 +41,6 @@ public class BusquedaPorRubroView extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Rubro:");
 
-        jcRubro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Comestible", "Limpieza", "Perfumeria" }));
         jcRubro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcRubroActionPerformed(evt);
@@ -92,8 +97,24 @@ public class BusquedaPorRubroView extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jcRubroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcRubroActionPerformed
-        modelo.addRow(jcRubro.getItemListeners());
-
+        
+ borrarFila();
+ 
+        for (Producto prod: productos) {
+            
+            
+            if (prod.getRubro().compareTo((Categoria)jcRubro.getSelectedItem())==0) {
+                
+                modelo.addRow(new Object[]{
+                prod.getCodigo(),
+                    prod.getDescripcion(),
+                    prod.getPrecio(),
+                    prod.getStock(),
+                });
+                
+            }
+        }
+                          
 
     }//GEN-LAST:event_jcRubroActionPerformed
 
@@ -102,7 +123,7 @@ public class BusquedaPorRubroView extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JComboBox<String> jcRubro;
+    private javax.swing.JComboBox<Categoria> jcRubro;
     private javax.swing.JTable jtProductos;
     // End of variables declaration//GEN-END:variables
 
@@ -114,5 +135,20 @@ public class BusquedaPorRubroView extends javax.swing.JInternalFrame {
 
         jtProductos.setModel(modelo);
 
+    }
+    
+    private void llenarCombo(){
+     jcRubro.addItem(Categoria.LIMPIEZA);
+     jcRubro.addItem(Categoria.COMESTIBLE);
+     jcRubro.addItem(Categoria.PERFUMERIA);
+     jcRubro.setSelectedIndex(-1);
+ }
+    
+    private void borrarFila(){
+        int filas=jtProductos.getRowCount()-1;
+        
+        for (int f=filas;f >=0; f--) {
+            modelo.removeRow(f);
+        }
     }
 }

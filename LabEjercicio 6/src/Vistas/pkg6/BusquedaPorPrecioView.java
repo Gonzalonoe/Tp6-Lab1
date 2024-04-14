@@ -1,6 +1,11 @@
 
 package Vistas.pkg6;
 
+import Entidades.Producto;
+import java.util.TreeSet;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -12,8 +17,9 @@ public class BusquedaPorPrecioView extends javax.swing.JInternalFrame {
         return false;
     }
 };
-    
-    public BusquedaPorPrecioView() {
+    private TreeSet<Producto> productos;
+    public BusquedaPorPrecioView(TreeSet<Producto> productos) {
+        this.productos=productos;
         initComponents();
         armarCabecera();
     }
@@ -40,11 +46,27 @@ public class BusquedaPorPrecioView extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Entre $:");
 
+        jTextField1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextField1FocusLost(evt);
+            }
+        });
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+
         jLabel3.setText("y");
 
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField2ActionPerformed(evt);
+            }
+        });
+        jTextField2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField2KeyReleased(evt);
             }
         });
 
@@ -108,6 +130,47 @@ public class BusquedaPorPrecioView extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
 
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jTextField1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField1FocusLost
+        double min;
+        if (!esDoublePositivo(jTextField1.getText())) {
+            JOptionPane.showMessageDialog(this, "El numero ingresado es invalido");
+            jTextField1.requestFocus();
+            jTextField1.setText("");
+            return;
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1FocusLost
+
+    private void jTextField2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyReleased
+    borrarFila();
+      
+      double min = Double.parseDouble(jTextField1.getText());
+      
+      
+      if (!esDoublePositivo(jTextField2.getText())) {
+            JOptionPane.showMessageDialog(this, "El numero ingresado es invalido");
+            jTextField2.requestFocus();
+            jTextField2.setText("");
+            return;
+        }else{  
+      for (Producto prod: productos) {
+            double max = Double.parseDouble(jTextField2.getText());
+            if (prod.getPrecio()>=min&&prod.getPrecio()<=max) {
+                
+                modelo.addRow(new Object[]{
+                prod.getCodigo(),
+                    prod.getDescripcion(),
+                    prod.getPrecio(),
+                    prod.getStock(),
+                });
+                
+            }
+        }}        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2KeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -129,4 +192,19 @@ public class BusquedaPorPrecioView extends javax.swing.JInternalFrame {
         jtProductos.setModel(modelo);
         
     }
+     
+     private void borrarFila(){
+        int filas=jtProductos.getRowCount()-1;
+        
+        for (int f=filas;f >=0; f--) {
+            modelo.removeRow(f);
+        }
+    }
+     
+    public static boolean esDoublePositivo(String entrada) {
+    String patronDouble = "^[0-9]*\\.?[0-9]+$";
+    Pattern pattern = Pattern.compile(patronDouble);
+    Matcher matcher = pattern.matcher(entrada);
+    return matcher.matches();
+}
 }

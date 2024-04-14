@@ -1,5 +1,6 @@
 package Vistas.pkg6;
 
+import Entidades.Categoria;
 import Entidades.Producto;
 import java.util.TreeSet;
 
@@ -10,7 +11,7 @@ public class MenuView extends javax.swing.JFrame {
     public MenuView() {
         this.listaProductos = new TreeSet<>();
         initComponents();
-
+        cargarLista();
     }
 
     @SuppressWarnings("unchecked")
@@ -101,7 +102,7 @@ public class MenuView extends javax.swing.JFrame {
         escritorio.removeAll();
         escritorio.repaint();
 
-        BusquedaPorPrecioView bpp = new BusquedaPorPrecioView();
+        BusquedaPorPrecioView bpp = new BusquedaPorPrecioView(listaProductos);
         bpp.setVisible(true);
 
         escritorio.add(bpp);
@@ -112,7 +113,7 @@ public class MenuView extends javax.swing.JFrame {
         escritorio.removeAll();
         escritorio.repaint();
 
-        BusquedaPorNombreView bpn = new BusquedaPorNombreView();
+        BusquedaPorNombreView bpn = new BusquedaPorNombreView(listaProductos);
         bpn.setVisible(true);
 
         escritorio.add(bpn);
@@ -123,7 +124,7 @@ public class MenuView extends javax.swing.JFrame {
         escritorio.removeAll();
         escritorio.repaint();
 
-        BusquedaPorRubroView bpr = new BusquedaPorRubroView();
+        BusquedaPorRubroView bpr = new BusquedaPorRubroView(listaProductos);
         bpr.setVisible(true);
 
         escritorio.add(bpr);
@@ -187,4 +188,19 @@ public class MenuView extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     // End of variables declaration//GEN-END:variables
 
+    private void cargarLista(){
+     
+        
+        listaProductos.add(new Producto(1, "Azúcar", 1000, 10, Categoria.COMESTIBLE));
+        listaProductos.add(new Producto(2, "Detergente", 500, 20, Categoria.LIMPIEZA));
+        listaProductos.add(new Producto(3, "Shampoo", 700, 15, Categoria.PERFUMERIA));
+        listaProductos.add(new Producto(4, "Arroz", 1500, 5, Categoria.COMESTIBLE));
+        listaProductos.add(new Producto(5, "Desodorante", 400, 25, Categoria.PERFUMERIA));
+        listaProductos.add(new Producto(6, "Jabón de manos", 300, 30, Categoria.LIMPIEZA));
+        listaProductos.add(new Producto(7, "Harina", 1200, 8, Categoria.COMESTIBLE));
+        listaProductos.add(new Producto(8, "Crema facial", 600, 18, Categoria.PERFUMERIA));
+        listaProductos.add(new Producto(9, "Limpiavidrios", 450, 22, Categoria.LIMPIEZA));
+        listaProductos.add(new Producto(10, "Leche", 800, 12, Categoria.COMESTIBLE));
+
+    }
 }

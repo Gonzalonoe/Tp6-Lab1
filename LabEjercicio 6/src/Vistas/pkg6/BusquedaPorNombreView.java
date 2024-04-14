@@ -1,7 +1,11 @@
 
 package Vistas.pkg6;
 
+import Entidades.Producto;
+import java.util.TreeSet;
 import javax.swing.table.DefaultTableModel;
+
+
 
 public class BusquedaPorNombreView extends javax.swing.JInternalFrame {
     
@@ -12,9 +16,13 @@ public class BusquedaPorNombreView extends javax.swing.JInternalFrame {
     }
 };
 
-    public BusquedaPorNombreView() {
+    private TreeSet<Producto> productos;
+
+    public BusquedaPorNombreView(TreeSet<Producto> productos) {
+        this.productos=productos;
         initComponents();
         armarCabecera();
+
     }
 
  
@@ -36,6 +44,12 @@ public class BusquedaPorNombreView extends javax.swing.JInternalFrame {
         jLabel1.setText("Listado por nombre");
 
         jLabel2.setText("Escriba los primeros caracteres: ");
+
+        jtBuscarPorNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtBuscarPorNombreKeyReleased(evt);
+            }
+        });
 
         jtProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -85,6 +99,22 @@ public class BusquedaPorNombreView extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jtBuscarPorNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtBuscarPorNombreKeyReleased
+       borrarFila();
+        for (Producto prod: productos) {
+            if (prod.getDescripcion().startsWith(jtBuscarPorNombre.getText())) {
+                
+                modelo.addRow(new Object[]{
+                prod.getCodigo(),
+                    prod.getDescripcion(),
+                    prod.getPrecio(),
+                    prod.getStock(),
+                });
+                
+            }
+        }
+    }//GEN-LAST:event_jtBuscarPorNombreKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -103,5 +133,13 @@ public class BusquedaPorNombreView extends javax.swing.JInternalFrame {
         
         jtProductos.setModel(modelo);
         
+    }
+    
+    private void borrarFila(){
+        int filas=jtProductos.getRowCount()-1;
+        
+        for (int f=filas;f >=0; f--) {
+            modelo.removeRow(f);
+        }
     }
 }

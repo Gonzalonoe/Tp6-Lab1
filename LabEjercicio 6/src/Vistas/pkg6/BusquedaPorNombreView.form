@@ -74,6 +74,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jtBuscarPorNombre">
+      <Events>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtBuscarPorNombreKeyReleased"/>
+      </Events>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
       <AuxValues>
