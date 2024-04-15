@@ -103,7 +103,7 @@ private TreeSet<Producto> productos;
         for (Producto prod: productos) {
             
             
-            if (prod.getRubro().compareTo((Categoria)jcRubro.getSelectedItem())==0) {
+            if (prod.getRubro().equals(jcRubro.getSelectedItem())) {
                 
                 modelo.addRow(new Object[]{
                 prod.getCodigo(),
